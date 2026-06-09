@@ -1,0 +1,38 @@
+import { Worker } from "bullmq";
+import { connection } from "./queue.js";
+import { createGraph } from "./graph.js";
+import { botQueue } from "./queue.js";
+
+const graph = createGraph();
+
+const worker = new Worker(
+  "bot-queue",
+  async (job) => {
+    const { userId, delay = 5000 } = job.data;
+
+    console.log(`⚙️ Running bot for user: ${userId}`);
+
+    const result = await graph.invoke({
+      userId,
+    });
+
+    console.log(`📊 [${userId}] decision:`, result.decision);
+
+    // instead of setInterval
+    await botQueue.add(
+      "tick",
+      { userId, delay },
+      {
+        delay, // pause betwwen calls
+        removeOnComplete: true,
+        removeOnFail: 100,
+      }
+    );
+
+    return result;
+  },
+  {
+    connection,
+    concurrency: 10, // count of workers
+  }
+);
