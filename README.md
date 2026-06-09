@@ -35,3 +35,11 @@ Jobs execute a LangGraph workflow and re-schedule themselves for continuous oper
 
 ```js
 concurrency: 10
+```
+
+## TODO
+
+```
+Implement trade tools
+It can be any tools dex api or cexs web3
+```
