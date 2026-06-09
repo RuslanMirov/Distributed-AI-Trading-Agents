@@ -1,24 +1,37 @@
-# LangGraph
+# 🚀 LangGraph + BullMQ Bot System
 
-```
-задаём точный порядок шагов и условия переходов
-```
+A scalable multi-user bot system using **LangGraph**, **BullMQ**, and **Redis**.
 
-```
-Annotation → описание состояния графа.
-addNode() → добавить шаг/функцию.
-addEdge() → указать, куда переходить после выполнения шага.
-invoke() → запустить граф и передавать состояние между узлами автоматически.
-```
+---
 
+## 🧠 Idea
 
-```
-🟦 LangChain — LLM (агент) сам решает, когда и какие инструменты вызывать
-🟨 LangGraph — ты задаёшь точный порядок шагов и условия переходов
+Each user bot runs as a **queue job** instead of `setInterval`.  
+Jobs execute a LangGraph workflow and re-schedule themselves for continuous operation.
 
-🟦 LangChain → AI решает, что делать
-🟨 LangGraph → ты решаешь, как идет процесс
+---
 
-🟦 LangChain → “LLM управляет инструментами”
-🟨 LangGraph → “ты управляешь процессом, LLM внутри шагов”
-```
+## ⚙️ Architecture
+
+---
+
+## 📦 Core parts
+
+- **BullMQ Queue** – stores bot jobs in Redis  
+- **Worker** – processes jobs and runs LangGraph  
+- **LangGraph** – AI workflow (price, news, decision)
+
+---
+
+## 🚀 API
+
+- `POST /run` – start bot  
+- `POST /stop` – stop bot  
+- `DELETE /delete` – remove bot  
+
+---
+
+## ⚡ Worker
+
+```js
+concurrency: 10
