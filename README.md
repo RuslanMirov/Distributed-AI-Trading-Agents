@@ -37,6 +37,13 @@ Jobs execute a LangGraph workflow and re-schedule themselves for continuous oper
 concurrency: 10
 ```
 
+# run 
+
+```
+node src/server.js   # API
+node src/worker.js   # worker 
+```
+
 ## TODO
 
 ```
