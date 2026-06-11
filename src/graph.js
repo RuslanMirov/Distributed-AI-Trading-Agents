@@ -1,7 +1,7 @@
 import { StateGraph, START, END, Annotation } from "@langchain/langgraph";
-import fetchNews from "./tools/fetchNews.js";
-import fetchPrice from "./tools/fetchPrice.js";
-import decide from "./tools/decide.js";
+import fetchNews from "../tools/fetchNews.js";
+import fetchPrice from "../tools/fetchPrice.js";
+import decide from "../tools/decide.js";
 
 export function createGraph() {
   const State = Annotation.Root({
