@@ -1,4 +1,4 @@
-import { getAssets } from "../db.js";
+import { getAssets } from "../src/db.js";
 
 export default async function fetchAssets(state) {
   const assets = await getAssets(state.userId);
