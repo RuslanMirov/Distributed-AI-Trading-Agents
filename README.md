@@ -20,6 +20,7 @@ Jobs execute a LangGraph workflow and re-schedule themselves for continuous oper
 - **BullMQ Queue** – stores bot jobs in Redis  
 - **Worker** – processes jobs and runs LangGraph  
 - **LangGraph** – AI workflow (price, news, decision)
+- **PostgreSQL** - DB for virtual portfolio, you can replace it with your tools
 
 ---
 
@@ -43,6 +44,7 @@ concurrency: 10
 DB_USER=
 DB_PASS=
 DB_NAME=
+OPENAI_API_KEY=
 ```
 
 # run 
@@ -52,9 +54,29 @@ node src/server.js   # API
 node src/worker.js   # worker 
 ```
 
-## TODO
+## Virtual portfolio
 
 ```
-Implement trade tools
-It can be any tools dex api or cexs web3
+Current show case use virtual portfolio, you can re-write it with dex or cexs implementation
+```
+
+# curl 
+
+```
+# 1. give a user some virtual holdings
+curl -X POST localhost:3000/assets -H "Content-Type: application/json" \
+  -d '{"userId":"user123","assets":{"ETH":2,"USDC":500}}'
+
+# 2. start the bot loop
+curl -X POST localhost:3000/run -H "Content-Type: application/json" \
+  -d '{"userId":"user123"}'
+
+# 3. watch worker logs tick every 5s, balances mutate in DB
+
+# 4. check holdings
+curl localhost:3000/assets/user123
+
+# 5. stop
+curl -X POST localhost:3000/stop -H "Content-Type: application/json" \
+  -d '{"userId":"user123"}'
 ```
