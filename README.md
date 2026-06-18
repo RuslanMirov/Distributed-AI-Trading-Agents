@@ -37,6 +37,14 @@ Jobs execute a LangGraph workflow and re-schedule themselves for continuous oper
 concurrency: 10
 ```
 
+# .env
+
+```
+DB_USER=
+DB_PASS=
+DB_NAME=
+```
+
 # run 
 
 ```
