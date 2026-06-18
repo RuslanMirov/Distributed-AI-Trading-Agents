@@ -1,6 +1,7 @@
 import pg from "pg";
+import 'dotenv/config'
+
 const { Pool } = pg;
-const dotenv = require('dotenv').config()
 
 export const pool = new Pool({
   host: 'localhost',

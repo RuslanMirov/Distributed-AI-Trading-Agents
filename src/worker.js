@@ -2,13 +2,15 @@ import { Worker } from "bullmq";
 import { connection } from "./queue.js";
 import { createGraph } from "./graph.js";
 import { botQueue } from "./queue.js";
+import 'dotenv/config'
 
 const graph = createGraph();
+const delayInterval = process.env.AGENT_INTERVAL | 10800000 // 3 hours
 
 const worker = new Worker(
   "bot-queue",
   async (job) => {
-    const { userId, delay = 5000 } = job.data;
+    const { userId, delay = process.env.AGENT_INTERVAL } = job.data;
 
     console.log(`⚙️ Running bot for user: ${userId}`);
 
