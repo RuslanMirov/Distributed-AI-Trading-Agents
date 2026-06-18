@@ -1,24 +1,29 @@
 import { StateGraph, START, END, Annotation } from "@langchain/langgraph";
+import fetchAssets from "../tools/fetchAssets.js";
 import fetchNews from "../tools/fetchNews.js";
-import fetchPrice from "../tools/fetchPrice.js";
 import decide from "../tools/decide.js";
+import trade from "../tools/trade.js";
 
 export function createGraph() {
   const State = Annotation.Root({
-    price: Annotation(),
-    news: Annotation(),
-    decision: Annotation(),
     userId: Annotation(),
+    assets: Annotation(),
+    news: Annotation(),
+    decisions: Annotation(),
+    results: Annotation(),
+    decision: Annotation(),
   });
 
   return new StateGraph(State)
-    .addNode("fetch_price", fetchPrice)
+    .addNode("fetch_assets", fetchAssets)
     .addNode("fetch_news", fetchNews)
     .addNode("decide", decide)
-    .addEdge(START, "fetch_price")
+    .addNode("trade", trade)
+    .addEdge(START, "fetch_assets")
     .addEdge(START, "fetch_news")
-    .addEdge("fetch_price", "decide")
+    .addEdge("fetch_assets", "decide")
     .addEdge("fetch_news", "decide")
-    .addEdge("decide", END)
+    .addEdge("decide", "trade")
+    .addEdge("trade", END)
     .compile();
 }
