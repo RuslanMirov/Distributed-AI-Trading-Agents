@@ -3,8 +3,12 @@ import 'dotenv/config'
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
+import { getAssets } from "../src/db.js";
+
 export default async function fetchNews(state) {
-  const symbols = Object.keys(state.assets ?? {});
+  const assets = await getAssets(state.userId);
+  const symbols = Object.keys(assets ?? {});
+  console.log("symbols", symbols, state)
   if (symbols.length === 0) return { news: [] };
 
   const res = await openai.chat.completions.create({

@@ -1,5 +1,6 @@
 export default async function decide(state) {
   const { assets, news } = state;
+  console.log("assets, news", assets, news)
   const decisions = [];
 
   for (const signal of news) {
