@@ -19,7 +19,7 @@ export default async function fetchNews(state) {
       {
         role: "system",
         content:
-          "You are a crypto analyst. For each asset return buy, sell, or nothing. " +
+          "You are a crypto analyst. For each asset find current news, then return buy, sell, or nothing. " +
           'Respond ONLY as JSON: {"news":[{"asset":"ETH","action":"buy|sell|nothing","reason":"..."}]}',
       },
       { role: "user", content: `Assets: ${symbols.join(", ")}` },
