@@ -51,8 +51,8 @@ AGENT_INTERVAL=10800000 # 3 hours
 # run 
 
 ```
-node src/server.js   # API
-node src/worker.js   # worker 
+node server.js   # API
+node worker.js   # worker 
 ```
 
 ## Virtual portfolio

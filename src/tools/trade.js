@@ -1,4 +1,4 @@
-import { getAssets, setAssets } from "../src/db.js";
+import { getAssets, setAssets } from "../db.js";
 
 // No ethers, no chain. Just mutate balances in Postgres.
 export default async function trade(state) {

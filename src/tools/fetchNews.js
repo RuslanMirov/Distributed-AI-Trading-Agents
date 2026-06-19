@@ -1,9 +1,8 @@
 import OpenAI from "openai";
 import 'dotenv/config'
+import { getAssets } from "../db.js";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
-import { getAssets } from "../src/db.js";
 
 export default async function fetchNews(state) {
   const assets = await getAssets(state.userId);

@@ -1,7 +1,7 @@
 import { Worker } from "bullmq";
-import { connection } from "./queue.js";
-import { createGraph } from "./graph.js";
-import { botQueue } from "./queue.js";
+import { connection } from "./src/queue.js";
+import { createGraph } from "./src/graph.js";
+import { botQueue } from "./src/queue.js";
 import 'dotenv/config'
 
 const graph = createGraph();

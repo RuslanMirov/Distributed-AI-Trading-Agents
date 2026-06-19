@@ -1,6 +1,6 @@
 import express from "express";
-import { botQueue } from "./queue.js";
-import { initDB, addAssets, setAssets, getAssets } from "./db.js";
+import { botQueue } from "./src/queue.js";
+import { initDB, addAssets, setAssets, getAssets } from "./src/db.js";
 
 const app = express();
 app.use(express.json());
